@@ -1,0 +1,23 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: ping-app
+  labels:
+    app: ping
+spec:
+  containers:
+  - name: ping-app
+    image: hashicorp/http-echo:0.2.3
+    args:
+    - "-text=pong"
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: ping-service
+spec:
+  selector:
+    app: ping
+  ports:
+  # Default port used by the image
+  - port: 5678

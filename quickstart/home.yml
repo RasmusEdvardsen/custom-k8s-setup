@@ -1,0 +1,23 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: home-app
+  labels:
+    app: home
+spec:
+  containers:
+  - name: home-app
+    image: hashicorp/http-echo:0.2.3
+    args:
+    - "-text=under construction 💎🙌"
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: home-service
+spec:
+  selector:
+    app: home
+  ports:
+  # Default port used by the image
+  - port: 5678
