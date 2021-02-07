@@ -9,19 +9,29 @@ see: https://kind.sigs.k8s.io/docs/user/quick-start/
     ```
 
 ## Setup k8s cluster and env
-* `kind create cluster --config k8s_env_setup/cluster.yml `
+* `kind create cluster --config environment_setup/cluster.yml `
 * `kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/static/provider/kind/deploy.yaml`
 * `kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v0.16.1/cert-manager.yaml`
 * After this step, wait a bit for the cert-manager and ingress-nginx objects to be created.
 
-## Setup ingress rules, ssl issuer
-* `kubectl apply -f k8s_env_setup/issuer.yml -f k8s_env_setup/ingress.yml`
+## Setup ssl issuer
+* `kubectl apply -f environment_setup/issuer.yml`
+
+## Setup ingress rules
+* `kubectl apply -f environment_setup/ingress.yml`
 
 ## Private image registry
 Create a personal access token from github, and use as follows: \
 `docker login docker.pkg.github.com --username RasmusEdvardsen --password PERSONAL_ACCESS_TOKEN` \
 This will output a path where docker saved the config. Use the path as follows: \
 `kubectl create secret generic githubregistrycreds --from-file=.dockerconfigjson=/PATH/TO/CONFIG.JSON --type kubernetes.io/dockerconfigjson`
+
+This secret can now be used for pods/deployments, as follows:
+```
+spec:
+  imagePullSecrets:
+  - name: ghcrcreds
+```
 
 ### Important note about image registries:
 docker.pkg.github.com is not supported well. \
