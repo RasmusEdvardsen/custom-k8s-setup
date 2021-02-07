@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: storage-app
+  labels:
+    app: storage
+spec:
+  containers:
+  - name: storage-app
+    image: ghcr.io/rasmusedvardsen/storage:1.0.0
+  imagePullSecrets:
+  - name: ghcrcreds
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: storage-service
+spec:
+  selector:
+    app: storage
+  ports:
+  - port: 23011

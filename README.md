@@ -1,12 +1,5 @@
-# Kubernetes
-
-### Note
-* Seems port forwarding of 80 and 443 was what I missed - very important: 
-https://kind.sigs.k8s.io/docs/user/configuration/#extra-port-mappings
-
-## Steps
-
-### Install Kind
+# Kubernetes Setup
+## Install Kind
 see: https://kind.sigs.k8s.io/docs/user/quick-start/
 * Run:
     ```
@@ -15,14 +8,30 @@ see: https://kind.sigs.k8s.io/docs/user/quick-start/
     mv ./kind /some-dir-in-your-PATH/kind
     ```
 
-### Quickstart
-* `kind create cluster --config cluster_init/cluster.yml `
+## Setup k8s cluster and env
+* `kind create cluster --config k8s_env_setup/cluster.yml `
 * `kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/static/provider/kind/deploy.yaml`
 * `kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v0.16.1/cert-manager.yaml`
 * After this step, wait a bit for the cert-manager and ingress-nginx objects to be created.
-* `kubectl apply -f quickstart/`
 
-#### Notes
+## Setup ingress rules, ssl issuer
+* `kubectl apply -f k8s_env_setup/issuer.yml -f k8s_env_setup/ingress.yml`
+
+## Private image registry
+Create a personal access token from github, and use as follows: \
+`docker login docker.pkg.github.com --username RasmusEdvardsen --password PERSONAL_ACCESS_TOKEN` \
+This will output a path where docker saved the config. Use the path as follows: \
+`kubectl create secret generic githubregistrycreds --from-file=.dockerconfigjson=/PATH/TO/CONFIG.JSON --type kubernetes.io/dockerconfigjson`
+
+### Important note about image registries:
+docker.pkg.github.com is not supported well. \
+ghcr.io is the new and improved github image registry
+
+## Deploy services to k8s
+We can now deploy services:
+* `kubectl apply -f kube_setup/`
+
+## Notes
 * The `cluster.yml` config file contains most importantly extra port mappings from the kind cluster to the host network on port 80 and 443.
 * For more about Ingress: \
     https://kind.sigs.k8s.io/docs/user/ingress/
