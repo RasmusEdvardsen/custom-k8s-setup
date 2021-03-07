@@ -8,11 +8,20 @@ spec:
   tls:
   - hosts:
     - kraeja.com
+    - www.kraeja.com
     - ping.kraeja.com
     - storage.kraeja.com
     secretName: tls-secret
   rules:
   - host: kraeja.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          serviceName: home-service
+          servicePort: 5678
+  - host: www.kraeja.com
     http:
       paths:
       - pathType: Prefix
