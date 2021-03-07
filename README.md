@@ -40,9 +40,9 @@ see: https://kind.sigs.k8s.io/docs/user/quick-start/
 
 ## Private image registry
 Create a personal access token from github, and use as follows: \
-`docker login docker.pkg.github.com --username RasmusEdvardsen --password PERSONAL_ACCESS_TOKEN` \
+`docker login ghcr.io --username RasmusEdvardsen --password PERSONAL_ACCESS_TOKEN` \
 This will output a path where docker saved the config. Use the path as follows: \
-`kubectl create secret generic githubregistrycreds --from-file=.dockerconfigjson=/PATH/TO/CONFIG.JSON --type kubernetes.io/dockerconfigjson`
+`kubectl create secret generic ghcrcreds --from-file=.dockerconfigjson=/PATH/TO/CONFIG.JSON --type kubernetes.io/dockerconfigjson`
 
 This secret can now be used for pods/deployments, as follows:
 ```
