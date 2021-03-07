@@ -83,5 +83,3 @@ We can now deploy services:
 * `kubectl apply -f ingress.yml`
 
 * For logs: `kubectl get events -n ingress-nginx --sort-by='.metadata.creationTimestamp'`
-
-* Following in Cluster might be important: `listenAddress: "127.0.0.1"`
