@@ -29,11 +29,11 @@ see: https://kind.sigs.k8s.io/docs/user/quick-start/
 * `kind create cluster --config environment_setup/cluster.yml`
 * `kind get kubeconfig > ~/.kube/config`
 * `kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/static/provider/kind/deploy.yaml`
-* `kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v0.16.1/cert-manager.yaml`
+* `kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v0.16.1/cert-manager.yaml  --wait`
 * After this step, wait a bit for the cert-manager and ingress-nginx objects to be created.
 
 ## Setup ssl issuer
-* `kubectl apply -f environment_setup/issuer.yml --wait`
+* `kubectl apply -f environment_setup/issuer.yml`
 
 ## Setup ingress rules
 * `kubectl apply -f ingress_rules/ingress.yml`
