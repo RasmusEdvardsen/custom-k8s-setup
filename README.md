@@ -1,5 +1,5 @@
 # Kubernetes Setup
-## Install Kind
+### Install Kind
 see: https://kind.sigs.k8s.io/docs/user/quick-start/
 * kind:
     ```
@@ -24,6 +24,9 @@ see: https://kind.sigs.k8s.io/docs/user/quick-start/
     sudo groupadd docker
     sudo usermod -aG docker ${USER}
     ```
+
+___
+___
 
 ## Setup k8s cluster
 * `kind create cluster --config cluster.yml`
@@ -59,7 +62,10 @@ We can now deploy services:
 * `kubectl apply -f services/`
 * `kubectl apply -f ingress.yml`
 
-## Notes
+___
+___
+
+### Notes
 * The `cluster.yml` config file contains most importantly extra port mappings from the kind cluster to the host network on port 80 and 443.
 
 * For more about Ingress: \
