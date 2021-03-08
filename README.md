@@ -1,29 +1,9 @@
 # Kubernetes Setup
-### Install Kind
+### Prereqs
 see: https://kind.sigs.k8s.io/docs/user/quick-start/
-* kind:
-    ```
-    curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.10.0/kind-linux-amd64
-    chmod +x ./kind
-    mv ./kind /usr/local/bin/
-    ```
-
-* kubectl:
-    ```
-    sudo apt-get update && sudo apt-get install -y apt-transport-https gnupg2 curl
-    curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
-    echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
-    sudo apt-get update
-    sudo apt-get install -y kubectl
-    ```
-    
-* docker: `apt install docker.io`
-
-* docker permissions:
-    ```
-    sudo groupadd docker
-    sudo usermod -aG docker ${USER}
-    ```
+* kind
+* kubectl    
+* docker
 
 ___
 ___
