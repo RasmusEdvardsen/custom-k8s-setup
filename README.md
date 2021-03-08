@@ -1,6 +1,7 @@
 # Kubernetes Setup
 ### Prereqs
 see: https://kind.sigs.k8s.io/docs/user/quick-start/
+* DNS domain name
 * kind
 * kubectl    
 * docker
