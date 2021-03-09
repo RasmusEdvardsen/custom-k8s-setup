@@ -15,3 +15,8 @@ nodes:
   - containerPort: 443
     hostPort: 443
     protocol: TCP
+  extraMounts:
+  - hostPath: /mnt/k8s
+    containerPath: /k8s
+  - hostPath: /mnt/k8s/models
+    containerPath: /k8s/models

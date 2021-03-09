@@ -1,0 +1,35 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: object-detection-app
+  labels:
+    app: object-detection
+spec:
+  volumes:
+  - name: models
+    hostPath:
+      path: /k8s/models  # matches kind containerPath:
+  containers:
+  - name: object-detection-app
+    image: ghcr.io/rasmusedvardsen/object_detection:1.0.1
+    env:
+    - name: PORT
+      value: "8080"
+    - name: MODEL_PATH
+      value: "/models/base_model_v6.h5"
+    volumeMounts:
+      - name: models
+        mountPath: /models  # in the container filesystem
+  imagePullSecrets:
+  - name: ghcrcreds
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: object-detection-service
+spec:
+  selector:
+    app: object-detection
+  ports:
+  # Default port used by the image
+  - port: 8080

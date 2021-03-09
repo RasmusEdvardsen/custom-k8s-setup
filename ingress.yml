@@ -11,6 +11,7 @@ spec:
     - www.kraeja.com
     - ping.kraeja.com
     - storage.kraeja.com
+    - object-detection.kraeja.com
     secretName: tls-secret
   rules:
   - host: kraeja.com
@@ -45,3 +46,11 @@ spec:
         backend:
           serviceName: storage-service
           servicePort: 23011
+  - host: object-detection.kraeja.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          serviceName: object-detection-service
+          servicePort: 8080
