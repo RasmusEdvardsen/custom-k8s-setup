@@ -55,21 +55,6 @@ ___
 * For more about CertManager: \
     https://www.digitalocean.com/community/tutorials/how-to-set-up-an-nginx-ingress-with-cert-manager-on-digitalocean-kubernetes
 
-* Ingress has link to issuer in
-    ```
-    metadata:
-      annotations:
-        cert-manager.io/cluster-issuer: "letsencrypt-prod"
-    ```
-
-* Ingress can now have several hosts specified to be covered by SSL under spec:
-    ```
-    spec:
-      tls:
-      - hosts:
-          - kraeja.com
-          - echo1.kraeja.com
-          secretName: tls-secret
-    ```
+* Loading local docker images in to kind k8s: `kind load docker-image my-custom-image --name kind-2`
 
 * For logs: `kubectl get events -n ingress-nginx --sort-by='.metadata.creationTimestamp'`
