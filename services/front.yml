@@ -1,0 +1,28 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: front-app
+  labels:
+    app: front
+spec:
+  containers:
+  - name: front-app
+    image: ghcr.io/rasmusedvardsen/front:1.0.0
+    env:
+    - name: HOST
+      value: "ping-service"
+    - name: PORT
+      value: "5678"
+  imagePullSecrets:
+  - name: ghcrcreds
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: front-service
+spec:
+  selector:
+    app: front
+  ports:
+  # Default port used by the image
+  - port: 8080
