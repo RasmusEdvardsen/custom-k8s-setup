@@ -7,12 +7,12 @@ metadata:
 spec:
   containers:
   - name: front-app
-    image: ghcr.io/rasmusedvardsen/front:1.0.0
+    image: ghcr.io/rasmusedvardsen/front:1.2.0
     env:
     - name: HOST
-      value: "ping-service"
+      value: "echo-service"
     - name: PORT
-      value: "5678"
+      value: "8080"
   imagePullSecrets:
   - name: ghcrcreds
 ---

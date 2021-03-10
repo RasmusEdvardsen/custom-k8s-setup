@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: echo-deployment
+  labels:
+    app: echo
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: echo
+  template:
+    metadata:
+      labels:
+        app: echo
+    spec:
+      containers:
+      - name: echo
+        image: ghcr.io/rasmusedvardsen/echo:1.0.0
+        env:
+        - name: MY_POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: MY_POD_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
+      imagePullSecrets:
+      - name: ghcrcreds
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: echo-service
+spec:
+  selector:
+    app: echo
+  ports:
+  # Default port used by the image
+  - port: 8080
