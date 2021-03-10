@@ -1,15 +1,24 @@
-kind: Pod
-apiVersion: v1
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: ping-app
+  name: ping-deployment
   labels:
     app: ping
 spec:
-  containers:
-  - name: ping-app
-    image: hashicorp/http-echo:0.2.3
-    args:
-    - "-text=pong"
+  replicas: 3
+  selector:
+    matchLabels:
+      app: ping
+  template:
+    metadata:
+      labels:
+        app: ping
+    spec:
+      containers:
+      - name: ping
+        image: hashicorp/http-echo:0.2.3
+        args:
+        - "-text=pong"
 ---
 kind: Service
 apiVersion: v1
