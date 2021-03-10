@@ -58,3 +58,5 @@ ___
 * Loading local docker images in to kind k8s: `kind load docker-image my-custom-image --name kind-2`
 
 * For logs: `kubectl get events -n ingress-nginx --sort-by='.metadata.creationTimestamp'`
+
+* For object-detection.kraeja.com to work, need to add model.h5 to /mnt/k8s/models/
