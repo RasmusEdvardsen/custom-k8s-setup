@@ -15,7 +15,7 @@ ___
 
 ## Apply external configs
 * `kubectl apply -f ext/ingress-nginx.yml`
-* `kubectl apply --validate=false -f ext/cert-manager.yml`
+* `kubectl apply -f ext/cert-manager.yml` (might need `--validate=false`)
 * After this step, wait a bit for the cert-manager and ingress-nginx objects to be created.
 
 ## Private image registry
