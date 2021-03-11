@@ -11,3 +11,5 @@
 
 * `kubectl proxy` and access dashboard on: 
 http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/
+
+* https://github.com/kubernetes/dashboard
