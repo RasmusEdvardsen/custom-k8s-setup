@@ -13,6 +13,8 @@ spec:
     - front.kraeja.com
     - storage.kraeja.com
     - object-detection.kraeja.com
+    - mq.kraeja.com
+    - admin.mq.kraeja.com
     secretName: tls-secret
   rules:
   - host: kraeja.com
@@ -63,3 +65,19 @@ spec:
         backend:
           serviceName: object-detection-service
           servicePort: 8080
+  - host: mq.kraeja.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          serviceName: rabbit-mq-cluster
+          servicePort: 5672
+  - host: admin.mq.kraeja.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          serviceName: rabbit-mq-cluster
+          servicePort: 15672
